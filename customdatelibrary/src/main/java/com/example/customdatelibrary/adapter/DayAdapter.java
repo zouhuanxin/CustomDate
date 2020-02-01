@@ -1,4 +1,4 @@
-package com.example.a13479.customdate.adapter;
+package com.example.customdatelibrary.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.a13479.customdate.MethodUtil;
-import com.example.a13479.customdate.R;
+import com.example.customdatelibrary.MethodUtil;
+import com.example.customdatelibrary.R;
 
 import java.util.ArrayList;
 import java.util.List;

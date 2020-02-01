@@ -1,4 +1,4 @@
-package com.example.a13479.customdate.adapter;
+package com.example.customdatelibrary.adapter;
 
 import android.support.v4.view.PagerAdapter;
 import android.view.View;

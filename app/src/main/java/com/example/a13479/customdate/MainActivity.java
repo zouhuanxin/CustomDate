@@ -8,6 +8,8 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.customdatelibrary.ZhxDate;
+import com.example.a13479.customdate.R;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,38 +106,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         List<String> templist = new ArrayList<>();
         templist.add("2020年1月8");
-        switch (v.getId()) {
-            case R.id.b1:
-                zhxDate.setType(1);
-                break;
-            case R.id.b2:
-                zhxDate.setType(2);
-                break;
-            case R.id.b3:
-                zhxDate.setType(3);
-                break;
-            case R.id.b4:
-                zhxDate.setType(4);
-                break;
-            case R.id.b5:
-                zhxDate.setStalist(1,templist);
-                break;
-            case R.id.b6:
-                zhxDate.setStalist(2,templist);
-                break;
-            case R.id.b7:
-                zhxDate.setStalist(3,null);
-                break;
-            case R.id.b8:
-                zhxDate.setStalist(4,templist);
-                break;
-            case R.id.b9:
-                zhxDate.setType(1);
-                zhxDate.setStalist(0,null);
-                break;
-            case R.id.b10:
-                Toast.makeText(MainActivity.this,String.valueOf(zhxDate.getList().size()),Toast.LENGTH_SHORT).show();
-                break;
+        int i = v.getId();
+        if (i == R.id.b1) {
+            zhxDate.setType(1);
+        } else if (i == R.id.b2) {
+            zhxDate.setType(2);
+
+        } else if (i == R.id.b3) {
+            zhxDate.setType(3);
+
+        } else if (i == R.id.b4) {
+            zhxDate.setType(4);
+
+        } else if (i == R.id.b5) {
+            zhxDate.setStalist(1, templist);
+
+        } else if (i == R.id.b6) {
+            zhxDate.setStalist(2, templist);
+
+        } else if (i == R.id.b7) {
+            zhxDate.setStalist(3, null);
+
+        } else if (i == R.id.b8) {
+            zhxDate.setStalist(4, templist);
+
+        } else if (i == R.id.b9) {
+            zhxDate.setType(1);
+            zhxDate.setStalist(0, null);
+
+        } else if (i == R.id.b10) {
+            Toast.makeText(MainActivity.this, String.valueOf(zhxDate.getList().size()), Toast.LENGTH_SHORT).show();
+
         }
     }
 }

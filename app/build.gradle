@@ -1,7 +1,7 @@
-//apply plugin: 'com.android.application'
-apply plugin: 'com.android.library'  //添加列
-apply plugin:'com.github.dcendents.android-maven' //添加列
-group='com.github.zouhuanxin' //添加列
+apply plugin: 'com.android.application'
+//apply plugin: 'com.android.library'  //添加列
+//apply plugin:'com.github.dcendents.android-maven' //添加列
+//group='com.github.zouhuanxin' //添加列
 
 android {
     compileSdkVersion 28
@@ -29,6 +29,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation project(':customdatelibrary')
 }
 
 

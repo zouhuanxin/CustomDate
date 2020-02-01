@@ -105,10 +105,10 @@
             android:text="结果集合"/>
     </LinearLayout>
 
-    <com.example.a13479.customdate.ZhxDate
+    <com.example.customdatelibrary.ZhxDate
         android:id="@+id/zhx"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </com.example.a13479.customdate.ZhxDate>
+    </com.example.customdatelibrary.ZhxDate>
 
 </LinearLayout>

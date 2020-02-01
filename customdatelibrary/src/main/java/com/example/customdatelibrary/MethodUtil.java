@@ -1,4 +1,4 @@
-package com.example.a13479.customdate;
+package com.example.customdatelibrary;
 
 import android.content.Context;
 import android.view.WindowManager;

@@ -1,4 +1,4 @@
-package com.example.a13479.customdate;
+package com.example.customdatelibrary;
 
 import android.content.Context;
 import android.os.Handler;
@@ -15,7 +15,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.a13479.customdate.adapter.*;
+import com.example.customdatelibrary.adapter.DayAdapter;
+import com.example.customdatelibrary.adapter.MonthAdapter;
+import com.example.customdatelibrary.adapter.PagerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -261,19 +263,16 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.i1:
-                if (year <= minyear){
-                    return;
-                }
-                year--;
-                break;
-            case R.id.i2:
-                if (year >= maxyear){
-                    return;
-                }
-                year++;
-                break;
+        if (v.getId() == R.id.i1){
+            if (year <= minyear){
+                return;
+            }
+            year--;
+        }else if (v.getId() == R.id.i2){
+            if (year >= maxyear){
+                return;
+            }
+            year++;
         }
         message = new Message();
         message.what = 001;

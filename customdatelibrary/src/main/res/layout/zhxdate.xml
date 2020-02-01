@@ -38,9 +38,9 @@
         android:layout_width="match_parent"
         android:layout_height="40dp">
     </android.support.v7.widget.RecyclerView>
-    <com.example.a13479.customdate.NoSlidingViewPager
+    <com.example.customdatelibrary.NoSlidingViewPager
         android:id="@+id/v1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </com.example.a13479.customdate.NoSlidingViewPager>
+    </com.example.customdatelibrary.NoSlidingViewPager>
 </LinearLayout>
