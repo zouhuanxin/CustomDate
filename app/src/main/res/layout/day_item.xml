@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/day_item_l1"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:padding="5dp"
+    android:background="#ffffff">
+    <TextView
+        android:id="@+id/day_item_t1"
+        android:background="@drawable/button_radius_white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="14sp"
+        android:textColor="#8B8989"
+        android:text="1"/>
+</LinearLayout>

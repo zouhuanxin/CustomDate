@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/i1"
+            android:padding="5dp"
+            android:src="@drawable/jiantouzuo"
+            android:layout_width="30dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/t1"
+            android:text="2020"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/i2"
+            android:padding="5dp"
+            android:src="@drawable/jiantouyou"
+            android:layout_width="30dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/r1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+    </android.support.v7.widget.RecyclerView>
+    <com.example.a13479.customdate.NoSlidingViewPager
+        android:id="@+id/v1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.example.a13479.customdate.NoSlidingViewPager>
+</LinearLayout>

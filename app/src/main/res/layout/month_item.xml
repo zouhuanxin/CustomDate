@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:minWidth="60dp"
+    android:layout_height="40dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/month_item_t1"
+        android:text="一月"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:padding="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp" />
+    <TextView
+        android:id="@+id/month_item_t2"
+        android:background="#4678ff"
+        android:layout_width="match_parent"
+        android:layout_height="3dp" />
+</LinearLayout>
