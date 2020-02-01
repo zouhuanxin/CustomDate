@@ -1,9 +1,12 @@
-apply plugin: 'com.android.application'
+//apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'  //添加列
+apply plugin:'com.github.dcendents.android-maven' //添加列
+group='com.github.zouhuanxin' //添加列
 
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.a13479.customdate"
+       // applicationId "com.example.a13479.customdate"
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
