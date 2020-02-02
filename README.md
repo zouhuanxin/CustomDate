@@ -69,7 +69,7 @@ maven { url 'https://jitpack.io' }
 提供xml类型方法设置:
 
 |值|类型|示例|说明|
-|:-|:-:|-:||
+|:-|:-:|:-:|-:|
 |bs|Integer|2|只能是双数 最小为2|
 |dayitemcolor|string|#4678ff|选中日期圆角颜色|
 |month_xhxcolor|string|#4678ff|月份下划线颜色|
