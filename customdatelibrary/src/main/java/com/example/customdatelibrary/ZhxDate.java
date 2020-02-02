@@ -99,6 +99,10 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
     public ZhxDate(Context context, AttributeSet attrs) {
         super(context, attrs);
         if (context == null) this.context = context;
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MenuItemLayout);
+        Constant.MONTH_XHX = a.getString(R.styleable.MenuItemLayout_month_xhxcolor)==null?"#4678ff":a.getString(R.styleable.MenuItemLayout_month_xhxcolor);
+        Constant.DAYITEM = a.getString(R.styleable.MenuItemLayout_dayitemcolor)==null?"#4678ff":a.getString(R.styleable.MenuItemLayout_dayitemcolor);
+        bs = a.getInteger(R.styleable.MenuItemLayout_bs,2);
         initData();
         init(context, attrs);
     }
@@ -106,10 +110,6 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
     private void init(Context context, AttributeSet attrs) {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.zhxdate, this, true);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MenuItemLayout);
-        Constant.MONTH_XHX = a.getString(R.styleable.MenuItemLayout_month_xhxcolor)==null?"#4678ff":a.getString(R.styleable.MenuItemLayout_month_xhxcolor);
-        Constant.DAYITEM = a.getString(R.styleable.MenuItemLayout_dayitemcolor)==null?"#4678ff":a.getString(R.styleable.MenuItemLayout_dayitemcolor);
-        bs = a.getInteger(R.styleable.MenuItemLayout_bs,2);
         initView(view);
         initmonth();
         initday();
