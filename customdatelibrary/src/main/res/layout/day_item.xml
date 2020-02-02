@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:layout_gravity="center"
+        android:textStyle="bold"
         android:textSize="14sp"
         android:textColor="#8B8989"
         android:text="1"/>

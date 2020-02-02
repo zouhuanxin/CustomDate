@@ -1,6 +1,7 @@
 package com.example.customdatelibrary;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
@@ -83,6 +84,11 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
         resh();
     }
 
+    public void setBs(int bs) {
+        this.bs = bs;
+        resh();
+    }
+
     private void resh(){
         initData();
         initView(view);
@@ -100,6 +106,10 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
     private void init(Context context, AttributeSet attrs) {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.zhxdate, this, true);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MenuItemLayout);
+        Constant.MONTH_XHX = a.getString(R.styleable.MenuItemLayout_month_xhxcolor)==null?"#4678ff":a.getString(R.styleable.MenuItemLayout_month_xhxcolor);
+        Constant.DAYITEM = a.getString(R.styleable.MenuItemLayout_dayitemcolor)==null?"#4678ff":a.getString(R.styleable.MenuItemLayout_dayitemcolor);
+        bs = a.getInteger(R.styleable.MenuItemLayout_bs,2);
         initView(view);
         initmonth();
         initday();

@@ -108,7 +108,7 @@
     <com.example.customdatelibrary.ZhxDate
         android:id="@+id/zhx"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
     </com.example.customdatelibrary.ZhxDate>
 
 </LinearLayout>
