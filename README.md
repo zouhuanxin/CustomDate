@@ -25,6 +25,14 @@ maven { url 'https://jitpack.io' }
  implementation 'com.github.zouhuanxin:CustomDate:1.7'
 ```
 
+```
+ <com.example.customdatelibrary.ZhxDate
+        android:id="@+id/zhxdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+ </com.example.customdatelibrary.ZhxDate>
+```
+
 效果图：
 
 |类型|效果|对应type值|
