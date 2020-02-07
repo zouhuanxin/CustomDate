@@ -65,6 +65,19 @@ maven { url 'https://jitpack.io' }
   ```
   setBs(2);
   ```
+- 设置标注信息
+  ```
+  List<Notebean> templist = new ArrayList<>();
+  templist.add(new Notebean("2020年2月8","2000"));
+  zhxDate.setNotebeans(templist);
+  ```
+- 设置代码选中日期 支持多选和连续俩种模式  连续模式只能传俩个日期
+  ```
+  List<String> templist2 = new ArrayList<>();
+  templist2.add("2020年2月12");
+  templist2.add("2020年2月13");
+  zhxDate.setDayReslist(templist2);
+  ```
 
 提供xml类型方法设置:
 
@@ -73,6 +86,10 @@ maven { url 'https://jitpack.io' }
 |bs|Integer|2|只能是双数 最小为2|
 |dayitemcolor|string|#4678ff|选中日期圆角颜色|
 |month_xhxcolor|string|#4678ff|月份下划线颜色|
+|month_fontsize|Integer|15|整数 月份字体大小设置|
+|day_fontsize|Integer|14|整数 日期字体大小设置|
+|daynote_fontsize|Integer|8|整数 日期下面小标注字体大小|
+|year_fontsize|Integer|16|整数 顶部年份字体大小设置|
 
 ---
 有问题联系作者 qq:634448817 备注当前项目名称哦
