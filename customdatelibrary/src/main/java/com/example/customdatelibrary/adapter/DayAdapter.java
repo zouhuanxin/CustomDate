@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.customdatelibrary.Constant;
 import com.example.customdatelibrary.MethodUtil;
 import com.example.customdatelibrary.R;
+import com.example.customdatelibrary.bean.Customdatebean;
 import com.example.customdatelibrary.bean.Notebean;
 
 import java.util.ArrayList;
@@ -416,5 +417,11 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ViewHolder> {
         }
     }
 
-
+    public void uploadCustomDateaResh(Customdatebean customdatebean){
+        for (int i=0;i<dgljs.size();i++){
+            if (dgljs.get(i).dayItemT1.getHint().equals(customdatebean.getOlddate())){
+                dgljs.get(i).dayItemT1.setText(customdatebean.getNewdata());
+            }
+        }
+    }
 }

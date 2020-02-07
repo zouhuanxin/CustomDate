@@ -131,6 +131,26 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
         resh();
     }
 
+    //自定义数据源
+    //会全部刷新
+    public void setCustomdates(List<Customdatebean> list) {
+        customdates = list;
+        monthlist.clear();
+        daylist.clear();
+        years.clear();
+        initData();
+        resh();
+    }
+
+    //更新自定义数据源
+    //局部刷新
+    public void uploadCustomdates(Customdatebean customdatebean){
+        customdatesAdd(customdatebean);
+        for (int i=0;i<dayAdapters.size();i++){
+            dayAdapters.get(i).uploadCustomDateaResh(customdatebean);
+        }
+    }
+
     private void resh(){
        // initData();
         synchronized (this){
@@ -151,6 +171,15 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
         Constant.MOUTH_FONTSIZE = a.getInteger(R.styleable.DateLayout_month_fontsize,15);
         Constant.DAY_FONTSIZE = a.getInteger(R.styleable.DateLayout_day_fontsize,14);
         Constant.DAYNOTE_FONTSIZE = a.getInteger(R.styleable.DateLayout_daynote_fontsize,8);
+        monthlist.clear();
+        customdates.clear();
+        daylist.clear();
+        years.clear();
+        notebeans.clear();
+        //单独放在这里进行初始化为了方便重新设置数据源刷新问题
+        customdatesAdd(new Customdatebean(Integer.parseInt(MethodUtil.getSystemTime().split("年")[0])+ "年" +
+                Integer.parseInt(MethodUtil.getSystemTime().split("年")[1].split("月")[0])+"月"+
+                Integer.valueOf(MethodUtil.getSystemTime().split("月")[1].split("日")[0]),"今天"));
         initData();
         init(context, attrs);
     }
@@ -164,7 +193,6 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
     }
 
     private void initData() {
-        monthlist.clear();
         monthlist.add("一月");
         monthlist.add("二月");
         monthlist.add("三月");
@@ -185,17 +213,21 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
         minyear = year - bs/2;
         maxyear = year + bs/2;
 
-        customdates.clear();
-        customdates.add(new Customdatebean(year+ "年" + month+"月"+ day,"今天"));
-
         createMonthDay(year);
+    }
+
+    private void customdatesAdd(Customdatebean customdatebean){
+        for (Customdatebean cb : customdates){
+            if (cb.getOlddate().equals(customdatebean.getOlddate())){
+                Collections.replaceAll(customdates,cb,customdatebean);
+                return;
+            }
+        }
+        customdates.add(customdatebean);
     }
 
     //生成当前年份的十二个月信息
     private void createMonthDay(int year) {
-        daylist.clear();
-        years.clear();
-        notebeans.clear();
         int c = bs/2;
         int y = year - c;
         for (int m=0;m<bs+1;m++){
