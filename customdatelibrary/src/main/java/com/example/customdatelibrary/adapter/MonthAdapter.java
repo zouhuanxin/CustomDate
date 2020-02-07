@@ -43,6 +43,7 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         viewHolder.monthItemT1.setText(list.get(i));
+        viewHolder.monthItemT1.setTextSize(Constant.MOUTH_FONTSIZE);
         viewHolder.monthItemT1.setTextColor(Color.parseColor("#cccccc"));
         viewHolder.monthItemT2.setBackgroundColor(Color.parseColor("#ffffff"));
         viewHolder.monthItemT1.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);

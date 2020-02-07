@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.customdatelibrary.Constant;
 import com.example.customdatelibrary.MethodUtil;
 import com.example.customdatelibrary.R;
+import com.example.customdatelibrary.bean.Notebean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +26,12 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ViewHolder> {
     private int type = 1;
     private int sta = 0;
     private List<String> jys;
+    private List<Notebean> notes;
     private List<ViewHolder> dgljs = new ArrayList<>(); //所有viewholder集合
 
-    public DayAdapter(List<String> list, int type, int sta, List<String> jys) {
+    public DayAdapter(List<String> list,List<Notebean> notes, int type, int sta, List<String> jys) {
         this.list = list;
+        this.notes = notes;
         this.type = type;
         this.sta = sta;
         this.jys = jys;
@@ -79,6 +82,10 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ViewHolder> {
         }
         viewHolder.dayItemT1.setText(list.get(i).indexOf("月") != -1 ? String.valueOf(list.get(i).split("月")[1]) : list.get(i));
         viewHolder.dayItemT1.setHint(list.get(i));
+        viewHolder.dayItemT1.setTextSize(Constant.DAY_FONTSIZE);
+        viewHolder.dayItemT2.setText(notes.get(i).getNote());
+        viewHolder.dayItemT2.setVisibility(TextUtils.isEmpty(notes.get(i).getNote())?View.GONE:View.VISIBLE);
+        viewHolder.dayItemT2.setTextSize(Constant.DAYNOTE_FONTSIZE);
         if (i < 7) {
             viewHolder.dayItemT1.setTextColor(Color.parseColor("#000000"));
         }
@@ -104,9 +111,9 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ViewHolder> {
         super.onViewAttachedToWindow(holder);
         //设置textview高度
         int w = MethodUtil.getScreenWidth(context);
-        ViewGroup.LayoutParams params = holder.dayItemL1.getLayoutParams();
+        ViewGroup.LayoutParams params = holder.dayItemG.getLayoutParams();
         params.height = w / 7;
-        holder.dayItemL1.setLayoutParams(params);
+        holder.dayItemG.setLayoutParams(params);
     }
 
     @Override
@@ -115,13 +122,17 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ViewHolder> {
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
+        private LinearLayout dayItemG;
         private LinearLayout dayItemL1;
         private TextView dayItemT1;
+        private TextView dayItemT2;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            dayItemG = (LinearLayout) itemView.findViewById(R.id.day_item_g);
             dayItemL1 = (LinearLayout) itemView.findViewById(R.id.day_item_l1);
             dayItemT1 = (TextView) itemView.findViewById(R.id.day_item_t1);
+            dayItemT2 = (TextView) itemView.findViewById(R.id.day_item_t2);
         }
     }
 
@@ -134,7 +145,7 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ViewHolder> {
         }
         if (index == i) {
             viewHolder.dayItemL1.setTag(true);
-            setPreTure(viewHolder.dayItemT1);
+            setPreTure(viewHolder.dayItemT1,viewHolder.dayItemL1);
         }
         viewHolder.dayItemL1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,10 +172,10 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ViewHolder> {
                 }
                 if (viewHolder.dayItemL1.getTag() == null || (boolean) viewHolder.dayItemL1.getTag() == false) {
                     //没有选中
-                    setPreTure(viewHolder.dayItemT1);
+                    setPreTure(viewHolder.dayItemT1,viewHolder.dayItemL1);
                     viewHolder.dayItemL1.setTag(true);
                 } else {
-                    setPreFalse(viewHolder.dayItemT1);
+                    setPreFalse(viewHolder.dayItemT1,viewHolder.dayItemL1);
                     viewHolder.dayItemL1.setTag(false);
                 }
             }
@@ -175,7 +186,7 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ViewHolder> {
     private int a = -1, b = -1;
 
     private void dgljpre(final ViewHolder viewHolder, final int i) {
-        viewHolder.dayItemL1.setPadding(0, 10, 0, 0);
+        viewHolder.dayItemG.setPadding(0, 10, 0, 0);
         if (i < 7 || TextUtils.isEmpty(viewHolder.dayItemT1.getText())) {
             return;
         }
@@ -184,7 +195,7 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ViewHolder> {
             public void onClick(View v) {
                 if (dgljs.get(i).dayItemL1.getTag() == null || (boolean) dgljs.get(i).dayItemL1.getTag() == false) {
                     //没有选中
-                    setPreTure(viewHolder.dayItemT1);
+                    setPreTure(viewHolder.dayItemT1,viewHolder.dayItemL1);
                     dgljs.get(i).dayItemL1.setTag(true);
                     dgljcolor2(i);
                 } else {
@@ -198,20 +209,20 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ViewHolder> {
         for (int i = 0; i < dgljs.size(); i++) {
             if (i == a) {
                 dgljs.get(a).dayItemL1.setTag(true);
-                dgljs.get(a).dayItemT1.setBackgroundResource(R.drawable.button_radius_bule_left);
+                dgljs.get(a).dayItemL1.setBackgroundResource(R.drawable.button_radius_bule_left);
                 dgljs.get(a).dayItemT1.setTextColor(Color.parseColor("#ffffff"));
-                uploadShape(dgljs.get(a).dayItemT1);
+                uploadShape(dgljs.get(a).dayItemL1);
             } else if (i == b) {
                 dgljs.get(b).dayItemL1.setTag(true);
-                dgljs.get(b).dayItemT1.setBackgroundResource(R.drawable.button_radius_bule_right);
+                dgljs.get(b).dayItemL1.setBackgroundResource(R.drawable.button_radius_bule_right);
                 dgljs.get(b).dayItemT1.setTextColor(Color.parseColor("#ffffff"));
-                uploadShape(dgljs.get(b).dayItemT1);
+                uploadShape(dgljs.get(b).dayItemL1);
             } else if (i > a && i < b) {
-                dgljs.get(i).dayItemT1.setBackgroundResource(R.drawable.button_bule);
+                dgljs.get(i).dayItemL1.setBackgroundResource(R.drawable.button_bule);
                 dgljs.get(i).dayItemT1.setTextColor(Color.parseColor("#ffffff"));
-                uploadShape(dgljs.get(i).dayItemT1);
+                uploadShape(dgljs.get(i).dayItemL1);
             } else {
-                setPreFalse(dgljs.get(i).dayItemT1);
+                setPreFalse(dgljs.get(i).dayItemT1,dgljs.get(i).dayItemL1);
             }
         }
     }
@@ -258,7 +269,7 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ViewHolder> {
         b = -1;
         for (int i = 0; i < dgljs.size(); i++) {
             dgljs.get(i).dayItemL1.setTag(false);
-            setPreFalse(dgljs.get(i).dayItemT1);
+            setPreFalse(dgljs.get(i).dayItemT1,dgljs.get(i).dayItemL1);
         }
     }
 
@@ -271,7 +282,7 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ViewHolder> {
             if (!TextUtils.isEmpty(dgljs.get(i).dayItemT1.getText())) {
                 if (isTouchPointInView2(dgljs.get(i).dayItemT1, x, y)) {
                     firstIndex = i;
-                    setPreTure(dgljs.get(i).dayItemT1);
+                    setPreTure(dgljs.get(i).dayItemT1,dgljs.get(i).dayItemL1);
                     dgljs.get(i).dayItemL1.setTag(true);
                 }
             }
@@ -282,11 +293,11 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ViewHolder> {
         for (int i = firstIndex; i < dgljs.size(); i++) {
             if (!TextUtils.isEmpty(dgljs.get(i).dayItemT1.getText())) {
                 if (isTouchPointInView(dgljs.get(i).dayItemT1, x, y)) {
-                    setPreTure(dgljs.get(i).dayItemT1);
+                    setPreTure(dgljs.get(i).dayItemT1,dgljs.get(i).dayItemL1);
                     dgljs.get(i).dayItemL1.setTag(true);
                     setCowColor(i);
                 } else {
-                    setPreFalse(dgljs.get(i).dayItemT1);
+                    setPreFalse(dgljs.get(i).dayItemT1,dgljs.get(i).dayItemL1);
                     dgljs.get(i).dayItemL1.setTag(false);
                 }
             }
@@ -341,7 +352,7 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ViewHolder> {
         for (int m = firstIndex; m < max; m++) {
             if (!TextUtils.isEmpty(dgljs.get(m).dayItemT1.getText())) {
                 dgljs.get(m).dayItemL1.setTag(true);
-                setPreTure(dgljs.get(m).dayItemT1);
+                setPreTure(dgljs.get(m).dayItemT1,dgljs.get(m).dayItemL1);
             }
         }
     }
@@ -368,20 +379,42 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ViewHolder> {
         return res;
     }
 
-    private void uploadShape(TextView textView){
-        GradientDrawable mGroupDrawable= (GradientDrawable) textView.getBackground();
+    private void uploadShape(LinearLayout view){
+        GradientDrawable mGroupDrawable= (GradientDrawable) view.getBackground();
         /*设置整体背景颜色*/
         mGroupDrawable.setColor(Color.parseColor(Constant.DAYITEM));
     }
 
-    private void setPreTure(TextView textView){
-        textView.setBackgroundResource(R.drawable.button_radius_bule);
+    private void setPreTure(TextView textView,LinearLayout linearLayout){
+        linearLayout.setBackgroundResource(R.drawable.button_radius_bule);
         textView.setTextColor(Color.parseColor("#ffffff"));
-        uploadShape(textView);
+        uploadShape(linearLayout);
     }
 
-    private void setPreFalse(TextView textView){
-        textView.setBackgroundResource(R.drawable.button_radius_white);
+    private void setPreFalse(TextView textView,LinearLayout linearLayout){
+        linearLayout.setBackgroundResource(R.drawable.button_radius_white);
         textView.setTextColor(Color.parseColor("#8B8989"));
     }
+
+    //程序自动选择
+    //支持多选
+    public void setDxDate(List<String> dates){
+        if (type ==1 || type == 4){
+            return;
+        }
+        for (int i=0;i<dates.size();i++){
+            for (int j=0;j<dgljs.size();j++){
+                if (dgljs.get(j).dayItemT1.getHint().equals(dates.get(i))){
+                    if (dgljs.get(j).dayItemL1.getTag() == null || (boolean) dgljs.get(j).dayItemL1.getTag() == false) {
+                        //没有选中
+                        setPreTure(dgljs.get(j).dayItemT1,dgljs.get(j).dayItemL1);
+                        dgljs.get(j).dayItemL1.setTag(true);
+                        if (type == 3) dgljcolor2(j);
+                    }
+                }
+            }
+        }
+    }
+
+
 }

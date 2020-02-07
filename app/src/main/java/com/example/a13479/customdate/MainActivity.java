@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.example.customdatelibrary.ZhxDate;
 import com.example.a13479.customdate.R;
+import com.example.customdatelibrary.bean.Notebean;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,6 +102,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         b8.setOnClickListener(this);
         b9.setOnClickListener(this);
         b10.setOnClickListener(this);
+
+        zhxDate.setType(3);
+        List<Notebean> templist = new ArrayList<>();
+        templist.add(new Notebean("2020年2月8","2000"));
+        zhxDate.setNotebeans(templist);
+
     }
 
     @Override
@@ -129,11 +137,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         } else if (i == R.id.b8) {
             zhxDate.setStalist(4, templist);
-
         } else if (i == R.id.b9) {
-            zhxDate.setType(1);
-            zhxDate.setStalist(0, null);
-
+//            zhxDate.setType(1);
+//            zhxDate.setStalist(0, null);
+            List<String> templist2 = new ArrayList<>();
+            templist2.add("2020年2月12");
+            templist2.add("2020年2月13");
+            zhxDate.setDayReslist(templist2);
         } else if (i == R.id.b10) {
             Toast.makeText(MainActivity.this, String.valueOf(zhxDate.getList().size()), Toast.LENGTH_SHORT).show();
 

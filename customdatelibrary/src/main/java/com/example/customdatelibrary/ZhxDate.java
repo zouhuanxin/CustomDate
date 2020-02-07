@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -19,8 +20,11 @@ import android.widget.TextView;
 import com.example.customdatelibrary.adapter.DayAdapter;
 import com.example.customdatelibrary.adapter.MonthAdapter;
 import com.example.customdatelibrary.adapter.PagerViewAdapter;
+import com.example.customdatelibrary.bean.Customdatebean;
+import com.example.customdatelibrary.bean.Notebean;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -72,6 +76,14 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
     //预选中日期集合
     private List<String> stalist = new ArrayList<>();
 
+    //自定义日期数据源
+    //默认里面只有今天的数据
+    //数据类型为 Customdatebean
+    private List<Customdatebean> customdates = new ArrayList<>();
+
+    //日期下面备注下标信息
+    private List<List<Notebean>> notebeans = new ArrayList<>();
+
     public void setStalist(int sta,List<String> stalist) {
         this.sta = sta;
         this.stalist = stalist;
@@ -89,20 +101,56 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
         resh();
     }
 
+    //设置当前选中哪个月份
+    //你只需要选中月份 当前年份不需要管 月份的选择与年份无关
+    public void setNatigationMonth(int i){
+        ma.setIndex(i);
+    }
+
+    //程序代码选择日期
+    //支持多选 连续俩种模式
+    public void setDayReslist(List<String> list) {
+        if (type == 3){
+            if (list.size()!=2) return;
+        }
+        for (int i=0;i<dayAdapters.size();i++){
+            dayAdapters.get(i).setDxDate(list);
+        }
+    }
+
+    public void setNotebeans(List<Notebean> list) {
+        for (int i=0;i<list.size();i++){
+            for (int j=0;j<notebeans.size();j++){
+                for (int m = 0;m<notebeans.get(j).size();m++){
+                    if (list.get(i).getDate().equals(notebeans.get(j).get(m).getDate())){
+                        notebeans.get(j).get(m).setNote(list.get(i).getNote());
+                    }
+                }
+            }
+        }
+        resh();
+    }
+
     private void resh(){
-        initData();
-        initView(view);
-        initmonth();
-        initday();
+       // initData();
+        synchronized (this){
+            initView(view);
+            initmonth();
+            initday();
+        }
     }
 
     public ZhxDate(Context context, AttributeSet attrs) {
         super(context, attrs);
         if (context == null) this.context = context;
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MenuItemLayout);
-        Constant.MONTH_XHX = a.getString(R.styleable.MenuItemLayout_month_xhxcolor)==null?"#4678ff":a.getString(R.styleable.MenuItemLayout_month_xhxcolor);
-        Constant.DAYITEM = a.getString(R.styleable.MenuItemLayout_dayitemcolor)==null?"#4678ff":a.getString(R.styleable.MenuItemLayout_dayitemcolor);
-        bs = a.getInteger(R.styleable.MenuItemLayout_bs,2);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DateLayout);
+        Constant.MONTH_XHX = a.getString(R.styleable.DateLayout_month_xhxcolor)==null?"#4678ff":a.getString(R.styleable.DateLayout_month_xhxcolor);
+        Constant.DAYITEM = a.getString(R.styleable.DateLayout_dayitemcolor)==null?"#4678ff":a.getString(R.styleable.DateLayout_dayitemcolor);
+        bs = a.getInteger(R.styleable.DateLayout_bs,2);
+        Constant.YEAR_FONTSIZE = a.getInteger(R.styleable.DateLayout_year_fontsize,16);
+        Constant.MOUTH_FONTSIZE = a.getInteger(R.styleable.DateLayout_month_fontsize,15);
+        Constant.DAY_FONTSIZE = a.getInteger(R.styleable.DateLayout_day_fontsize,14);
+        Constant.DAYNOTE_FONTSIZE = a.getInteger(R.styleable.DateLayout_daynote_fontsize,8);
         initData();
         init(context, attrs);
     }
@@ -132,9 +180,13 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
 
         year = Integer.parseInt(MethodUtil.getSystemTime().split("年")[0]);
         month = Integer.parseInt(MethodUtil.getSystemTime().split("年")[1].split("月")[0]);
-        nowpager = bs/2 *12 +1;
+        day = Integer.valueOf(MethodUtil.getSystemTime().split("月")[1].split("日")[0]);
+        nowpager = bs/2 *12 +1 + month - 1;
         minyear = year - bs/2;
         maxyear = year + bs/2;
+
+        customdates.clear();
+        customdates.add(new Customdatebean(year+ "年" + month+"月"+ day,"今天"));
 
         createMonthDay(year);
     }
@@ -143,11 +195,13 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
     private void createMonthDay(int year) {
         daylist.clear();
         years.clear();
+        notebeans.clear();
         int c = bs/2;
         int y = year - c;
         for (int m=0;m<bs+1;m++){
             for (int i = 1; i < 13; i++) {
                 List<String> tl = new ArrayList<>();
+                List<Notebean> tnotelist = new ArrayList<>();
                 tl.add("日");
                 tl.add("一");
                 tl.add("二");
@@ -155,18 +209,37 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
                 tl.add("四");
                 tl.add("五");
                 tl.add("六");
+                for (int s = 0;s<7;s++){
+                    tnotelist.add(new Notebean("",""));
+                }
                 int t = MethodUtil.getWeekdayOfMonth(y+m, i, 1);
                 if (t != 7) {
                     for (int j = 0; j < t; j++) {
                         tl.add("");
+                        tnotelist.add(new Notebean("",""));
                     }
                 }
                 int a = MethodUtil.getMonthOfDay(y+m, i);
-                for (int n = 1; n <= a; n++) {
-                    tl.add(y+m+"年"+i+"月"+String.valueOf(n));
-                }
+                loadDay(tl,a,y,m,i,tnotelist);
                 years.add(y + m);
                 daylist.add(tl);
+                notebeans.add(tnotelist);
+            }
+        }
+    }
+    //装载日期数据
+    private void loadDay(List<String>tl,int a,int y,int m,int i,List<Notebean>tnotelist){
+        for (int n = 1; n <= a; n++) {
+            String s = y+m+"年"+i+"月"+String.valueOf(n);
+            String s2 = y+m+"年"+(i<10?"0"+i:i)+"月"+String.valueOf(n<10?"0"+n:n);
+            tl.add(s);
+            tnotelist.add(new Notebean(s,""));
+        }
+        for (int p = 0;p < customdates.size();p++){
+            for (int u = 0;u < tl.size();u++){
+                if (customdates.get(p).getOlddate().equals(tl.get(u))){
+                    Collections.replaceAll(tl,tl.get(u),y+m+"年"+i+"月"+customdates.get(p).getNewdata());
+                }
             }
         }
     }
@@ -178,6 +251,7 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         r1.setLayoutManager(linearLayoutManager);
         r1.setAdapter(ma);
+        ma.setIndex(month - 1);
         ma.setOnMonthAdapterClick(new MonthAdapter.OnMonthAdapterClick() {
             @Override
             public void OnClick(int i) {
@@ -199,7 +273,7 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
             View dayview = inflater.inflate(R.layout.monthfragment, null);
             final RecyclerView dayview_R = dayview.findViewById(R.id.monthfragment_r1);
             GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 7);
-            final DayAdapter dayAdapter = new DayAdapter(daylist.get(i), type,sta,stalist);
+            final DayAdapter dayAdapter = new DayAdapter(daylist.get(i),notebeans.get(i), type,sta,stalist);
             dayAdapters.add(dayAdapter);
             dayview_R.setLayoutManager(gridLayoutManager);
             dayview_R.setAdapter(dayAdapter);
@@ -266,6 +340,8 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
         i2 = (ImageView) view.findViewById(R.id.i2);
         r1 = (RecyclerView) view.findViewById(R.id.r1);
         v1 = (NoSlidingViewPager) view.findViewById(R.id.v1);
+
+        t1.setTextSize(Constant.YEAR_FONTSIZE);
 
         i1.setOnClickListener(this);
         i2.setOnClickListener(this);

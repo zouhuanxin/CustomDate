@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="MenuItemLayout">
+    <declare-styleable name="DateLayout">
         <attr name="month_xhxcolor" format="string" />
         <attr name="dayitemcolor" format="string" />
         <attr name="bs" format="integer" />
+        <attr name="month_fontsize" format="integer" />
+        <attr name="day_fontsize" format="integer" />
+        <attr name="daynote_fontsize" format="integer" />
+        <attr name="year_fontsize" format="integer" />
     </declare-styleable>
 </resources>
