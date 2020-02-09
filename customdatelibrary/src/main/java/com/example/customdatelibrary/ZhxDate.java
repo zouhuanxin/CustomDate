@@ -162,7 +162,7 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
 
     public ZhxDate(Context context, AttributeSet attrs) {
         super(context, attrs);
-        if (context == null) this.context = context;
+        if (this.context == null) this.context = context;
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DateLayout);
         Constant.MONTH_XHX = a.getString(R.styleable.DateLayout_month_xhxcolor)==null?"#4678ff":a.getString(R.styleable.DateLayout_month_xhxcolor);
         Constant.DAYITEM = a.getString(R.styleable.DateLayout_dayitemcolor)==null?"#4678ff":a.getString(R.styleable.DateLayout_dayitemcolor);
@@ -304,6 +304,10 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
         for (int i = 0; i < 12*(bs+1); i++) {
             View dayview = inflater.inflate(R.layout.monthfragment, null);
             final RecyclerView dayview_R = dayview.findViewById(R.id.monthfragment_r1);
+            final TextView titleview_R = dayview.findViewById(R.id.monthfragment_title);
+            int y = Integer.parseInt(MethodUtil.getSystemTime().split("年")[0]);
+            int b = y - bs/2;
+            titleview_R.setText(b+MethodUtil.getNowYear(i)+"年"+(i - 12*MethodUtil.getNowYear(i) +1)+"月");
             GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 7);
             final DayAdapter dayAdapter = new DayAdapter(daylist.get(i),notebeans.get(i), type,sta,stalist);
             dayAdapters.add(dayAdapter);

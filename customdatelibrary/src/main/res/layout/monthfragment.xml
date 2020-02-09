@@ -3,7 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff">
+    android:background="#ffffff"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/monthfragment_title"
+        android:visibility="gone"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:text="2020年01月06日"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#f1f1f1"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/monthfragment_r1"
         android:layout_width="match_parent"

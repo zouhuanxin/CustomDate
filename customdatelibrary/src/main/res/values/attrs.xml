@@ -8,5 +8,9 @@
         <attr name="day_fontsize" format="integer" />
         <attr name="daynote_fontsize" format="integer" />
         <attr name="year_fontsize" format="integer" />
+        <attr name="title_fontsize" format="integer" />
+        <attr name="title_backcolor" format="string" />
+        <attr name="title_fontcolor" format="string" />
+        <attr name="title_local" format="string" />
     </declare-styleable>
 </resources>

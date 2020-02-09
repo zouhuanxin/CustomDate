@@ -74,4 +74,36 @@ public class MethodUtil {
         int height = wm.getDefaultDisplay().getHeight();
         return width;
     }
+
+    public static int getNowYear(int i){
+        if (i>=0 && i<12){
+            return 0;
+        }else if (i>=12 && i<24){
+            return 1;
+        }else if (i>=24 && i<36){
+            return 2;
+        }else if (i>=48 && i<60){
+            return 3;
+        }else if (i>=60 && i<72){
+            return 4;
+        }else if (i>=72 && i<84){
+            return 5;
+        }else if (i>=84 && i<96){
+            return 6;
+        }else if (i>=96 && i<108){
+            return 7;
+        }else if (i>=108 && i<120){
+            return 8;
+        }else{
+            throw new IndexOutOfBoundsException("倍数设置不能超过4");
+        }
+    }
+
+    /**
+     * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
+     */
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
 }
