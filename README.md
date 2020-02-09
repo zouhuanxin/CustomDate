@@ -22,7 +22,15 @@ maven { url 'https://jitpack.io' }
 ```
 
 ```
- implementation 'com.github.zouhuanxin:CustomDate:1.5'
+ implementation 'com.github.zouhuanxin:CustomDate:1.7'
+```
+
+```
+ <com.example.customdatelibrary.ZhxDate
+        android:id="@+id/zhxdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+ </com.example.customdatelibrary.ZhxDate>
 ```
 
 效果图：
@@ -78,6 +86,19 @@ maven { url 'https://jitpack.io' }
   templist2.add("2020年2月13");
   zhxDate.setDayReslist(templist2);
   ```
+- 重新全部更新数据源
+  如果你想把日历上的 某一日期 默认显示是数字 1 2 3 .... 你想换成一些别的文字 就可以使用这个方法
+  ```
+            List<Customdatebean> templist2 = new ArrayList<>();
+            templist2.add(new Customdatebean("2020年2月12","我是王八蛋"));
+            templist2.add(new Customdatebean("2020年2月13","我是王八蛋"));
+            zhxDate.setCustomdates(templist2);
+  ```
+- 局部刷新数据源
+  和上面的区别在于 上面会把整个控件重新初始化一次 这个方法不会进行初始化操作 只会局部刷新变量UI
+  ```
+  zhxDate.uploadCustomdates(new Customdatebean("2020年2月12","我是王八蛋"));
+  ```
 
 提供xml类型方法设置:
 
@@ -93,5 +114,7 @@ maven { url 'https://jitpack.io' }
 
 ---
 有问题联系作者 qq:634448817 备注当前项目名称哦
+
+如果喜欢，不妨点个星星哦。
 
 
