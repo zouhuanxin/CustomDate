@@ -43,7 +43,7 @@ maven { url 'https://jitpack.io' }
 </com.example.customdatelibrary.VerticalZhxDate>
 ```
 
-效果图：
+横向日历效果图：
 
 |类型|效果|对应type值|
 |:-|:-:|-:|
