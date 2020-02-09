@@ -9,7 +9,9 @@
     <com.example.customdatelibrary.VerticalZhxDate
         android:id="@+id/verticalzhxdate"
         android:layout_width="match_parent"
-        android:layout_height="400dp">
+        android:layout_height="400dp"
+        app:title_local="left"
+        app:title_fontsize="18">
     </com.example.customdatelibrary.VerticalZhxDate>
 
 </LinearLayout>

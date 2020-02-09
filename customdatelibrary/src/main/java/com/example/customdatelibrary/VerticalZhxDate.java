@@ -2,11 +2,13 @@ package com.example.customdatelibrary;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.os.Message;
 import android.support.annotation.UiThread;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -161,6 +163,10 @@ public class VerticalZhxDate extends LinearLayout {
         Constant.MOUTH_FONTSIZE = a.getInteger(R.styleable.DateLayout_month_fontsize, 15);
         Constant.DAY_FONTSIZE = a.getInteger(R.styleable.DateLayout_day_fontsize, 14);
         Constant.DAYNOTE_FONTSIZE = a.getInteger(R.styleable.DateLayout_daynote_fontsize, 8);
+        Constant.TITLE_FONTSIZE = a.getInteger(R.styleable.DateLayout_title_fontsize, 15);
+        Constant.TITLE_bACKCOLOR = a.getString(R.styleable.DateLayout_title_backcolor) == null ? "#f1f1f1" : a.getString(R.styleable.DateLayout_title_backcolor);
+        Constant.TITLE_FONTCOLOR = a.getString(R.styleable.DateLayout_title_fontcolor) == null ? "#000000" : a.getString(R.styleable.DateLayout_title_fontcolor);
+        Constant.TITLE_LOCAL = a.getString(R.styleable.DateLayout_title_local) == null ? "center" : a.getString(R.styleable.DateLayout_title_local);
         monthlist.clear();
         customdates.clear();
         daylist.clear();
@@ -264,6 +270,11 @@ public class VerticalZhxDate extends LinearLayout {
             int y = Integer.parseInt(MethodUtil.getSystemTime().split("年")[0]);
             int b = y - bs / 2;
             titleview_R.setText(b + MethodUtil.getNowYear(i) + "年" + (i - 12 * MethodUtil.getNowYear(i) + 1) + "月");
+            titleview_R.setTextColor(Color.parseColor(Constant.TITLE_FONTCOLOR));
+            titleview_R.setBackgroundColor(Color.parseColor(Constant.TITLE_bACKCOLOR));
+            titleview_R.setTextSize(Constant.TITLE_FONTSIZE);
+            titleview_R.setGravity(Constant.TITLE_LOCAL.equals("center")?Gravity.CENTER:Constant.TITLE_LOCAL.equals("left")?
+                    Gravity.CENTER|Gravity.LEFT:Constant.TITLE_LOCAL.equals("right")?Gravity.CENTER|Gravity.RIGHT:Gravity.CENTER);
             titleview_R.setVisibility(VISIBLE);
             GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 7);
             final DayAdapter dayAdapter = new DayAdapter(daylist.get(i), notebeans.get(i), type, sta, stalist);
