@@ -8,6 +8,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.customdatelibrary.OnDateSingleClick;
 import com.example.customdatelibrary.ZhxDate;
 import com.example.a13479.customdate.R;
 import com.example.customdatelibrary.bean.Customdatebean;
@@ -104,11 +105,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         b9.setOnClickListener(this);
         b10.setOnClickListener(this);
 
-        zhxDate.setType(3);
-        List<Notebean> templist = new ArrayList<>();
-        templist.add(new Notebean("2020年2月8","2300"));
-        zhxDate.setNotebeans(templist);
+//        zhxDate.setType(3);
+//        List<Notebean> templist = new ArrayList<>();
+//        templist.add(new Notebean("2020年2月8","2300"));
+//        zhxDate.setNotebeans(templist);
 
+        zhxDate.setOnDateSingleClick(new OnDateSingleClick() {
+            @Override
+            public void onclick(String value) {
+                Toast.makeText(MainActivity.this,value,Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

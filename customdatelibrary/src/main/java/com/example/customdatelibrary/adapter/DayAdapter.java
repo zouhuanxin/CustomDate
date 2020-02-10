@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.customdatelibrary.Constant;
 import com.example.customdatelibrary.MethodUtil;
+import com.example.customdatelibrary.OnDateSingleClick;
 import com.example.customdatelibrary.R;
 import com.example.customdatelibrary.bean.Customdatebean;
 import com.example.customdatelibrary.bean.Notebean;
@@ -29,8 +30,13 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ViewHolder> {
     private List<String> jys;
     private List<Notebean> notes;
     private List<ViewHolder> dgljs = new ArrayList<>(); //所有viewholder集合
+    private OnDateSingleClick onDateSingleClick;
 
-    public DayAdapter(List<String> list,List<Notebean> notes, int type, int sta, List<String> jys) {
+    public void setOnDateSingleClick(OnDateSingleClick onDateSingleClick) {
+        this.onDateSingleClick = onDateSingleClick;
+    }
+
+    public DayAdapter(List<String> list, List<Notebean> notes, int type, int sta, List<String> jys) {
         this.list = list;
         this.notes = notes;
         this.type = type;
@@ -151,6 +157,7 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ViewHolder> {
         viewHolder.dayItemL1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (onDateSingleClick != null) onDateSingleClick.onclick(viewHolder.dayItemT1.getHint().toString());
                 if (i == index) {
                     index = -1;
                 } else {
@@ -168,6 +175,7 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ViewHolder> {
         viewHolder.dayItemL1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (onDateSingleClick != null) onDateSingleClick.onclick(viewHolder.dayItemT1.getHint().toString());
                 if (i < 7 || TextUtils.isEmpty(viewHolder.dayItemT1.getText())) {
                     return;
                 }

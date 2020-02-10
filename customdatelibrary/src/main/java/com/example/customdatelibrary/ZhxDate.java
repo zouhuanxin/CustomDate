@@ -84,7 +84,14 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
     //日期下面备注下标信息
     private List<List<Notebean>> notebeans = new ArrayList<>();
 
-    public void setStalist(int sta,List<String> stalist) {
+    private OnDateSingleClick onDateSingleClick;
+
+    public void setOnDateSingleClick(OnDateSingleClick onDateSingleClick) {
+        this.onDateSingleClick = onDateSingleClick;
+        resh();
+    }
+
+    public void setStalist(int sta, List<String> stalist) {
         this.sta = sta;
         this.stalist = stalist;
         resh();
@@ -310,6 +317,7 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
             titleview_R.setText(b+MethodUtil.getNowYear(i)+"年"+(i - 12*MethodUtil.getNowYear(i) +1)+"月");
             GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 7);
             final DayAdapter dayAdapter = new DayAdapter(daylist.get(i),notebeans.get(i), type,sta,stalist);
+            dayAdapter.setOnDateSingleClick(onDateSingleClick);
             dayAdapters.add(dayAdapter);
             dayview_R.setLayoutManager(gridLayoutManager);
             dayview_R.setAdapter(dayAdapter);

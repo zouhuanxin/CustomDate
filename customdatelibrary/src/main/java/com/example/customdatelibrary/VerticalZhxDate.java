@@ -78,6 +78,13 @@ public class VerticalZhxDate extends LinearLayout {
 
     private LinearLayout verticalzhxdateGroup;
 
+    private OnDateSingleClick onDateSingleClick;
+
+    public void setOnDateSingleClick(OnDateSingleClick onDateSingleClick) {
+        this.onDateSingleClick = onDateSingleClick;
+        resh();
+    }
+
     public void setStalist(int sta, List<String> stalist) {
         this.sta = sta;
         this.stalist = stalist;
@@ -278,6 +285,7 @@ public class VerticalZhxDate extends LinearLayout {
             titleview_R.setVisibility(VISIBLE);
             GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 7);
             final DayAdapter dayAdapter = new DayAdapter(daylist.get(i), notebeans.get(i), type, sta, stalist);
+            dayAdapter.setOnDateSingleClick(onDateSingleClick);
             dayAdapters.add(dayAdapter);
             dayview_R.setLayoutManager(gridLayoutManager);
             dayview_R.setAdapter(dayAdapter);
