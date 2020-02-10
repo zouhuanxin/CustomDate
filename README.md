@@ -1,5 +1,5 @@
 # CustomDate
-一款多功能日历 支持单选 多选 起终位置选择 触摸连续选择
+一款多功能日历 支持横向选中滚动日历模式 支持高仿携程竖向滚动日历模式 支持单选 多选 起终位置选择 触摸连续选择
 
 建议应用场景：
 - 酒店预订
@@ -24,7 +24,7 @@ maven { url 'https://jitpack.io' }
 ```
  implementation 'com.github.zouhuanxin:CustomDate:1.7'
 ```
-
+横向日历
 ```
  <com.example.customdatelibrary.ZhxDate
         android:id="@+id/zhxdate"
@@ -32,8 +32,18 @@ maven { url 'https://jitpack.io' }
         android:layout_height="wrap_content">
  </com.example.customdatelibrary.ZhxDate>
 ```
+竖向日历
+```
+<com.example.customdatelibrary.VerticalZhxDate
+        android:id="@+id/verticalzhxdate"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        app:title_local="left"
+        app:title_fontsize="18">
+</com.example.customdatelibrary.VerticalZhxDate>
+```
 
-效果图：
+横向日历效果图：
 
 |类型|效果|对应type值|
 |:-|:-:|-:|
@@ -111,6 +121,10 @@ maven { url 'https://jitpack.io' }
 |day_fontsize|Integer|14|整数 日期字体大小设置|
 |daynote_fontsize|Integer|8|整数 日期下面小标注字体大小|
 |year_fontsize|Integer|16|整数 顶部年份字体大小设置|
+|title_fontsize|Integer|15|整数 标题字体大小设置 竖向日历才显示|
+|title_backcolor|string|#f1f1f1|标题栏背景色 竖向日历才显示|
+|title_fontcolor|string|#000000|标题栏字体颜色 竖向日历才显示|
+|title_local|string|center|标题栏文字位置 支持三种 left center right  默认居中center  竖向日历才显示|
 
 ---
 有问题联系作者 qq:634448817 备注当前项目名称哦
