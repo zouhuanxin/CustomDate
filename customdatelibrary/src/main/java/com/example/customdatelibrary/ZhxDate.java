@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -384,6 +385,11 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
         i2 = (ImageView) view.findViewById(R.id.i2);
         r1 = (RecyclerView) view.findViewById(R.id.r1);
         v1 = (NoSlidingViewPager) view.findViewById(R.id.v1);
+
+        int w = MethodUtil.getScreenWidth(context);
+        ViewGroup.LayoutParams params = v1.getLayoutParams();
+        params.height = w / 7 * 6;
+        v1.setLayoutParams(params);
 
         t1.setTextSize(Constant.YEAR_FONTSIZE);
 
