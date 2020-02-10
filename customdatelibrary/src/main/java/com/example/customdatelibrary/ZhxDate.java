@@ -25,6 +25,7 @@ import com.example.customdatelibrary.adapter.PagerViewAdapter;
 import com.example.customdatelibrary.bean.Customdatebean;
 import com.example.customdatelibrary.bean.Notebean;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -454,5 +455,4 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
         }
         return res;
     }
-
 }

@@ -61,13 +61,21 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ViewHolder> {
             //每种模式可以指定选中日期 1
             //每种模式可以选择指定日期禁用 2
             if (type == 1 || type == 2){
-                for (String s : jys) {
-                    if (s.equals(list.get(i))) {
-                        viewHolder.dayItemL1.setEnabled(sta == 1 ? true : false);
-                        if (sta == 2) viewHolder.dayItemT1.setTextColor(Color.parseColor("#cccccc"));
-                    } else {
-                        viewHolder.dayItemL1.setEnabled(sta == 1 ? false : true);
-                        if (sta == 1) viewHolder.dayItemT1.setTextColor(Color.parseColor("#cccccc"));
+                if (sta == 1){
+                    viewHolder.dayItemL1.setEnabled(false);
+                    viewHolder.dayItemT1.setTextColor(Color.parseColor("#cccccc"));
+                    for (String s : jys){
+                        if (s.equals(list.get(i))){
+                            viewHolder.dayItemL1.setEnabled(true);
+                            viewHolder.dayItemT1.setTextColor(Color.parseColor("#8B8989"));
+                        }
+                    }
+                }else if (sta == 2){
+                    for (String s : jys){
+                        if (s.equals(list.get(i))){
+                            viewHolder.dayItemL1.setEnabled(false);
+                            viewHolder.dayItemT1.setTextColor(Color.parseColor("#cccccc"));
+                        }
                     }
                 }
             }
