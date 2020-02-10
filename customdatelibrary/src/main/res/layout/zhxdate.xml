@@ -20,6 +20,7 @@
         <TextView
             android:id="@+id/t1"
             android:text="2020"
+            android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold"
             android:gravity="center"

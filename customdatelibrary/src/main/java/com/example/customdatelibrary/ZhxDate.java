@@ -2,6 +2,7 @@ package com.example.customdatelibrary;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
@@ -174,6 +175,7 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DateLayout);
         Constant.MONTH_XHX = a.getString(R.styleable.DateLayout_month_xhxcolor)==null?"#4678ff":a.getString(R.styleable.DateLayout_month_xhxcolor);
         Constant.DAYITEM = a.getString(R.styleable.DateLayout_dayitemcolor)==null?"#4678ff":a.getString(R.styleable.DateLayout_dayitemcolor);
+        Constant.YEAR_FONTCOLOR = a.getString(R.styleable.DateLayout_year_fontcolor)==null?"#000000":a.getString(R.styleable.DateLayout_year_fontcolor);
         bs = a.getInteger(R.styleable.DateLayout_bs,2);
         Constant.YEAR_FONTSIZE = a.getInteger(R.styleable.DateLayout_year_fontsize,16);
         Constant.MOUTH_FONTSIZE = a.getInteger(R.styleable.DateLayout_month_fontsize,15);
@@ -392,6 +394,8 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
         v1.setLayoutParams(params);
 
         t1.setTextSize(Constant.YEAR_FONTSIZE);
+        t1.setTextColor(Color.parseColor(Constant.YEAR_FONTCOLOR));
+
 
         i1.setOnClickListener(this);
         i2.setOnClickListener(this);
