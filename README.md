@@ -22,7 +22,7 @@ maven { url 'https://jitpack.io' }
 ```
 
 ```
- implementation 'com.github.zouhuanxin:CustomDate:1.9'
+ implementation 'com.github.zouhuanxin:CustomDate:1.9.3'
 ```
 横向日历
 ```
