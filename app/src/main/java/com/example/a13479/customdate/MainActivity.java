@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            zhxDate.setCustomdates(templist2);
             zhxDate.uploadCustomdates(new Customdatebean("2020年2月12","我是王八蛋"));
         } else if (i == R.id.b10) {
-            Toast.makeText(MainActivity.this, String.valueOf(zhxDate.getList().size()), Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, String.valueOf(zhxDate.getList()), Toast.LENGTH_SHORT).show();
 
         }
     }

@@ -450,6 +450,9 @@ public class ZhxDate extends LinearLayout implements View.OnClickListener {
         List<String> res = new ArrayList<>();
         for (int i=0;i<dayAdapters.size();i++){
             for (String s : dayAdapters.get(i).getList()){
+                if (s.indexOf("今天") != -1){
+                        s = MethodUtil.getSystemTime().split("日")[0];
+                }
                 res.add(s);
             }
         }
